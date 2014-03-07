@@ -20,7 +20,7 @@
 export TOPDIR=$(PWD)/
 export TOOLPATH=$(TOPDIR)/../../build/gcc-4.3.3/build_mips/staging_dir/usr/
 export KERNELPATH=$(TOPDIR)/../../linux/kernels/mips-linux-2.6.15
-export UTILPATH=$(TOPDIR)/../utility/bin
+export UTILPATH=$(TOPDIR)/../utils/bin
 export PATH:=$(TOPDIR)/tools:$(TOOLPATH)/bin:$(TOPDIR)/src:${PATH}
 
 PRJ_NAME = rombootdrv
@@ -76,7 +76,7 @@ OBJCOPY =  $(CROSS_COMPILE)objcopy
 OBJDUMP =  $(CROSS_COMPILE)objdump
 
 AFLAGS = -Wa,-gstabs -D__ASSEMBLY__ -g  -Os   -D__KERNEL__ -DTEXT_BASE=$(LOADADDR) -I$(TOPDIR)../rom-boot-sco -I$(TOPDIR)../rom-boot-sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
-CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR)../rom-boot-sco -I$(TOPDIR)../rom-boot-sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
+CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR)../rom-boot/sco -I$(TOPDIR)../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
 
 ifeq ($(emu),1)
 $(info "Building for emulation")
