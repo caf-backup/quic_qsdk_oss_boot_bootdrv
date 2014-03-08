@@ -75,8 +75,8 @@ LD =       $(CROSS_COMPILE)ld
 OBJCOPY =  $(CROSS_COMPILE)objcopy
 OBJDUMP =  $(CROSS_COMPILE)objdump
 
-AFLAGS = -Wa,-gstabs -D__ASSEMBLY__ -g  -Os   -D__KERNEL__ -DTEXT_BASE=$(LOADADDR) -I$(TOPDIR)../rom-boot-sco -I$(TOPDIR)../rom-boot-sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
-CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR)../rom-boot/sco -I$(TOPDIR)../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
+AFLAGS = -Wa,-gstabs -D__ASSEMBLY__ -g  -Os   -D__KERNEL__ -DTEXT_BASE=$(LOADADDR) -I$(TOPDIR)../../rom-boot/sco -I$(TOPDIR)../../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
+CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR)../../rom-boot/sco -I$(TOPDIR)../../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
 
 ifeq ($(emu),1)
 $(info "Building for emulation")
@@ -143,8 +143,8 @@ $(PRJ_NAME).srec : $(PRJ_NAME).elf
 
 $(PRJ_NAME).bin : $(PRJ_NAME).elf
 	$(OBJCOPY) -S -O binary $(strip-flags) $(PRJ_NAME).elf $(PRJ_NAME).bin
-	../utility/bin/bin2hex $(PRJ_NAME).bin fwu_$(PRJ_NAME).c 0 usb waspRomInitFw
-	../utility/bin/array2bin fwu_$(PRJ_NAME).c ath_tgt_fw1.fw
+	../utils/bin/bin2hex $(PRJ_NAME).bin fwu_$(PRJ_NAME).c 0 usb waspRomInitFw
+	../utils/bin/array2bin fwu_$(PRJ_NAME).c ath_tgt_fw1.fw
 
 clean:
 	rm -f *~ *.o $(PRJ_NAME).elf $(PRJ_NAME).srec $(PRJ_NAME).bin fwu_$(PRJ_NAME).c
