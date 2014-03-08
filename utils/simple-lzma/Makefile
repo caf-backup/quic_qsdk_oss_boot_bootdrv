@@ -20,7 +20,7 @@
 export TOPDIR=$(PWD)/
 export TOOLPATH=$(TOPDIR)/../../build/gcc-4.3.3/build_mips/staging_dir/usr/
 export KERNELPATH=$(TOPDIR)/../../linux/kernels/mips-linux-2.6.31
-export UTILPATH=$(TOPDIR)/../../../boot/utility/bin/
+export UTILPATH=$(TOPDIR)/../../../../boot/rom-boot-drv/utils/bin/
 
 export PATH:=$(TOPDIR)/build/util:$(TOPDIR)/tools:$(TOPDIR)/src:$(TOOLPATH)/bin:$(TOPDIR)/linux:$(TOPDIR)/build:$(BOOTLOADERDIR)/ecos/tools/bin:`pwd`:${PATH}
 
