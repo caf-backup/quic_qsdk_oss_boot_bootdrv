@@ -20,29 +20,29 @@
 #ifndef _AG7240_H
 #define _AG7240_H
 
-#include <linux/types.h>
+#include <asm/types.h>
 
 /*
  * h/w descriptor
  */
 typedef struct {
-    uint32_t    pkt_start_addr;
+    a_uint32_t    pkt_start_addr;
 
-    uint32_t    is_empty       :  1;
-    uint32_t    res1           : 10;
-    uint32_t    ftpp_override  :  5;
-    uint32_t    res2           :  4;
-    uint32_t    pkt_size       : 12;
+    a_uint32_t    is_empty       :  1;
+    a_uint32_t    res1           : 10;
+    a_uint32_t    ftpp_override  :  5;
+    a_uint32_t    res2           :  4;
+    a_uint32_t    pkt_size       : 12;
 
-    uint32_t    next_desc      ;
+    a_uint32_t    next_desc      ;
 }ag7240_desc_t;
 
 #define NO_OF_TX_FIFOS  8
 #define NO_OF_RX_FIFOS  8
 
 typedef struct {
-    ag7240_desc_t *fifo_tx[NO_OF_TX_FIFOS];
-    ag7240_desc_t *fifo_rx[NO_OF_RX_FIFOS];
+    ag7240_desc_t fifo_tx[NO_OF_TX_FIFOS];
+    ag7240_desc_t fifo_rx[NO_OF_RX_FIFOS];
     struct eth_device *dev;
     u32            next_tx;
     u32            next_rx;
@@ -195,6 +195,20 @@ typedef struct {
 
 #define AG7240_GE_MAC_ADDR1             0x40
 #define AG7240_GE_MAC_ADDR2             0x44
+
+/*
+ * Ethernet config registers
+ */
+#define AG7240_ETH_CFG                  0x18070000
+#define AG7240_ETH_CFG_RGMII_GE0        (1<<0)
+#define AG7240_ETH_CFG_MII_GE0          (1<<1)
+#define AG7240_ETH_CFG_GMII_GE0         (1<<2)
+#define AG7240_ETH_CFG_MII_GE0_MASTER   (1<<3)
+#define AG7240_ETH_CFG_MII_GE0_SLAVE    (1<<4)
+#define AG7240_ETH_CFG_GE0_ERR_EN       (1<<5)
+#define AG7240_ETH_CFG_SW_ONLY_MODE     (1<<6)
+#define AG7240_ETH_CFG_SW_PHY_SWAP      (1<<7)
+#define AG7240_ETH_CFG_SW_PHY_ADDR_SWAP (1<<8)
 
 /*
  *  * ownership of descriptors between DMA and cpu
