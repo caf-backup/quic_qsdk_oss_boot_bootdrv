@@ -75,8 +75,8 @@ LD =       $(CROSS_COMPILE)ld
 OBJCOPY =  $(CROSS_COMPILE)objcopy
 OBJDUMP =  $(CROSS_COMPILE)objdump
 
-AFLAGS = -Wa,-gstabs -D__ASSEMBLY__ -g  -Os   -D__KERNEL__ -DTEXT_BASE=$(LOADADDR) -I$(TOPDIR)../../rom-boot/sco -I$(TOPDIR)../../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
-CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR)../../rom-boot/sco -I$(TOPDIR)../../rom-boot/sco/include -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
+AFLAGS = -Wa,-gstabs -D__ASSEMBLY__ -g  -Os   -D__KERNEL__ -DTEXT_BASE=$(LOADADDR) -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
+CFLAGS = -Wall -Wa,-gstabs -g  -Os   -D__KERNEL__ -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -ffreestanding -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -Werror
 
 ifeq ($(emu),1)
 $(info "Building for emulation")
