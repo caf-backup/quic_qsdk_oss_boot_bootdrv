@@ -4,7 +4,7 @@
   
   LZMA SDK 4.40 Copyright (c) 1999-2006 Igor Pavlov (2006-05-01)
   http://www.7-zip.org/
-  Copyright (c) 2013 Qualcomm Atheros, Inc.
+  Copyright (c) 2013, The Linux Foundation. All rights reserved.
 
   LZMA SDK is licensed under two licenses:
   1) GNU Lesser General Public License (GNU LGPL)

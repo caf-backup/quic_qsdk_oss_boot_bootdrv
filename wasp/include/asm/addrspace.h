@@ -5,7 +5,7 @@
  *
  * Copyright (C) 1996 by Ralf Baechle
  * Copyright (C) 2000 by Maciej W. Rozycki
- * Copyright (c) 2013 Qualcomm Atheros, Inc.
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
  *
  * Defitions for the address spaces of the MIPS CPUs.
  */

@@ -9,7 +9,7 @@
  * Kevin D. Kissell, kevink@mips.com and Carsten Langgaard, carstenl@mips.com
  * Copyright (C) 2000 MIPS Technologies, Inc.  All rights reserved.
  * Copyright (C) 2003  Maciej W. Rozycki
- * Copyright (c) 2013 Qualcomm Atheros, Inc.
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
  */
 #ifndef _ASM_MIPSREGS_H
 #define _ASM_MIPSREGS_H
