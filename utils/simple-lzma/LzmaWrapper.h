@@ -10,7 +10,7 @@
 ** COPYRIGHT    :       Copyright (c) 2006
 **                      Infineon Technologies AG
 **                      Am Campeon 1-12, 85579 Neubiberg, Germany
-**			Copyright (c) 2013 Qualcomm Atheros, Inc.
+**			Copyright (c) 2013, The Linux Foundation. All rights reserved.
 **
 **    This program is free software; you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by

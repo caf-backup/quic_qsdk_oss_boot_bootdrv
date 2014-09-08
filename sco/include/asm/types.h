@@ -6,7 +6,7 @@
  *
  * Copyright (C) 1994, 1995, 1996, 1999 by Ralf Baechle
  * Copyright (C) 1999 Silicon Graphics, Inc.
- * Copyright (c) 2013 Qualcomm Atheros, Inc. 
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
  */
 #ifndef _ASM_TYPES_H
 #define _ASM_TYPES_H
