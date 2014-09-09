@@ -91,7 +91,7 @@ $(PRJ_NAME).srec : $(PRJ_NAME).elf
 
 $(PRJ_NAME).bin : $(PRJ_NAME).elf
 	$(OBJCOPY) -S -O binary $(strip-flags) $(PRJ_NAME).elf $(PRJ_NAME).bin
-	../utils/bin/bin2hex $(PRJ_NAME).bin fwu_$(PRJ_NAME).c 0 usb waspRomInitFw
+	$(UTILPATH)/bin2hex $(PRJ_NAME).bin fwu_$(PRJ_NAME).c 0 usb waspRomInitFw
 
 clean:
 	rm -f *~ *.o $(PRJ_NAME).elf $(PRJ_NAME).srec $(PRJ_NAME).bin fwu_$(PRJ_NAME).c

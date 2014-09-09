@@ -23,6 +23,8 @@ tf=$fn.tmp		# temp/intermediate file
 
 ps=2048			# Nand page size
 
+UTILPATH=${UTILPATH:-../utility/bin}
+
 #
 # The following load and entry point addresses are
 # in the uncached space, so that the boot-rom can
@@ -99,7 +101,7 @@ prep_file()
 	ep=`/bin/echo -n $2 | cut -c1-8 | sed 's/../\\\\x&/g'`
 	la=`/bin/echo -n $3 | cut -c1-8 | sed 's/../\\\\x&/g'`
 	sz=`printf "%08x" $sz | cut -c1-8 | sed 's/../\\\\x&/g'`
-	cs=`../../rom-boot-drv/utils/bin/checksum $tf swap | sed 's/../\\\\x&/g'`
+	cs=`${UTILPATH}/checksum $tf swap | sed 's/../\\\\x&/g'`
 
 	#
 	# Remember to update 'hs' if something gets added here...
