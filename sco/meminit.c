@@ -290,7 +290,7 @@ ath_ram_type(uint32_t bs)
 int /* ram type */
 ath_ddr_initial_config(uint32_t refresh)
 {
-	int		ddr_config, ddr_config2, ddr_config3, ext_mod, mod_val,
+	int		ddr_config, ddr_config2, ddr_config3, mod_val,
 			mod_val_init, cycle_val, tap_val, type, ctl_config;
 	uint32_t	bootstrap;
 
@@ -304,7 +304,6 @@ ath_ddr_initial_config(uint32_t refresh)
 		ddr_config	= CFG_DDR2_CONFIG_VAL;
 		ddr_config2	= CFG_DDR2_CONFIG2_VAL;
 		ddr_config3	= CFG_DDR2_CONFIG3_VAL;
-		ext_mod		= CFG_DDR2_EXT_MODE_VAL;
 		mod_val_init	= CFG_DDR2_MODE_VAL_INIT;
 		mod_val		= CFG_DDR2_MODE_VAL;
 		tap_val		= CFG_DDR2_TAP_VAL;
@@ -341,7 +340,6 @@ ath_ddr_initial_config(uint32_t refresh)
 		ddr_config	= CFG_DDR1_CONFIG_VAL;
 		ddr_config2	= CFG_DDR1_CONFIG2_VAL;
 		ddr_config3	= CFG_DDR1_CONFIG3_VAL;
-		ext_mod		= CFG_DDR1_EXT_MODE_VAL;
 		mod_val_init	= CFG_DDR1_MODE_VAL_INIT;
 		mod_val		= CFG_DDR1_MODE_VAL;
 		tap_val		= CFG_DDR1_TAP_VAL;
@@ -500,10 +498,10 @@ uint8_t tap_sweep[32], tap_center[32];
 int
 ath_mem_config(void)
 {
-	unsigned int type, reg32;
+	unsigned int reg32;
 	extern uint32_t *ath_ddr_tap_cal(void);
 
-	type = ath_ddr_initial_config(ATH_DDR_REFRESH_VAL);
+	ath_ddr_initial_config(ATH_DDR_REFRESH_VAL);
 
 	ath_ddr_tap_cal();
 
