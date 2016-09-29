@@ -838,7 +838,6 @@ athrs17_reg_write(uint32_t reg_addr, uint32_t reg_val)
 void
 init_s17_lpbk(void)
 {
-	int phyBase = 0;
 	int phyAddr = 0;
 	unsigned int rddata;
 
@@ -859,7 +858,6 @@ init_s17_lpbk(void)
 	//athrs17_reg_write(0x7c  , 0x0000007d); // 100 mbps
 	//athrs17_reg_write(0x7c  , 0x0000007c); // 10 mbps
 
-	phyBase = 0;
 #ifdef ATH_S17_MAC0_SGMII
 	phyAddr = 4;
 #else
@@ -966,8 +964,8 @@ int pkt_compare_data(void)
 	unsigned int i, j;
 	//unsigned int k,rddata;
 	unsigned int node_rx_buf_len;
-	//unsigned int * node_tx_desc_ptr = (unsigned int *) 0xa0280000;
-	unsigned int *node_rx_desc_ptr = (unsigned int *)0xa0380000;
+	//volatile unsigned int * node_tx_desc_ptr = (unsigned int *) 0xa0280000;
+	volatile unsigned int *node_rx_desc_ptr = (unsigned int *)0xa0380000;
 	unsigned int *node_tx_buf_addr = (unsigned int *)0xa0680000;
 	unsigned int *node_rx_buf_addr = (unsigned int *)0xa0580000;
 	unsigned int error = 0;
@@ -1025,12 +1023,14 @@ void athrs_rgmii_cal(ath_gmac_softc_t * mac)
 	unsigned int k, l;
 	unsigned int rddata = 0, error = 0;
 	unsigned int node_rx_buf_len = 1600;
-	unsigned int *node_tx_desc_ptr = (unsigned int *)0xa0280000;
-	unsigned int *node_rx_desc_ptr = (unsigned int *)0xa0380000;
+	volatile unsigned int *node_tx_desc_ptr = (unsigned int *)0xa0280000;
+	volatile unsigned int *node_rx_desc_ptr = (unsigned int *)0xa0380000;
 	unsigned int *node_rx_buf_addr = (unsigned int *)0xa0580000;
 	unsigned int *node_tx_buf_addr = (unsigned int *)0xa0680000;
 	unsigned int s17_tx_pkt = 0;
+#if DEBUG
 	unsigned int s17_rx_pkt = 0;
+#endif
 	unsigned int to;
 	unsigned int pass = 1;
 	unsigned int fail = 0;
@@ -1238,12 +1238,12 @@ void athrs_rgmii_cal(ath_gmac_softc_t * mac)
 #endif
 				}
 			}
+#if DEBUG
 #ifdef ATH_S17_MAC0_SGMII
 			s17_rx_pkt = athrs17_reg_read(0x163c) + (athrs17_reg_read(0x1640) << 16);
 #else
 			s17_rx_pkt = athrs17_reg_read(0x103c) + (athrs17_reg_read(0x1040) << 16);
 #endif
-#if DEBUG
 			printf("TEST: RPKT in S17 0x%08x\n", s17_rx_pkt);
 #endif
 #ifdef ATH_S17_MAC0_SGMII
@@ -1377,12 +1377,12 @@ void athrs_rgmii_cal(ath_gmac_softc_t * mac)
 #endif
 				}
 			}
+#if DEBUG
 #ifdef ATH_S17_MAC0_SGMII
 			s17_rx_pkt = athrs17_reg_read(0x163c) + (athrs17_reg_read(0x1640) << 16);
 #else
 			s17_rx_pkt = athrs17_reg_read(0x103c) + (athrs17_reg_read(0x1040) << 16);
 #endif
-#if DEBUG
 			printf("TEST: RPKT in S17 0x%08x\n", s17_rx_pkt);
 #endif
 #ifdef ATH_S17_MAC0_SGMII
