@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2013, 2016 The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -17,11 +17,11 @@
 #define P2_LOAD_OFFSET	(LOAD_ADDRESS - 0x80400000)
 
 /* LZMA settings */
-#define P2_UNCOMP_LOAD_ADDR 0x80002000
-#define P2_UNCOMP_LOAD_LEN  (0x003fe000 + P2_LOAD_OFFSET)
+#define P2_UNCOMP_LOAD_ADDR	0x80060000
+#define P2_UNCOMP_LOAD_LEN	(0x600000 + P2_LOAD_OFFSET)
 
-#define P2_TEMP_BUF_ADDR (0x80700000 + P2_LOAD_OFFSET)
-#define P2_TEMP_BUF_LEN  0x00100000
+#define P2_TEMP_BUF_ADDR	(LOAD_ADDRESS + P2_LOAD_OFFSET)
+#define P2_TEMP_BUF_LEN	0x00100000
 
 extern int lzma_inflate(unsigned char *source, int s_len, 
     unsigned char *dest, int d_len, 
