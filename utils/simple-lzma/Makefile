@@ -32,8 +32,8 @@ LD =       $(CROSS_COMPILE)ld
 OBJCOPY =  $(CROSS_COMPILE)objcopy
 OBJDUMP =  $(CROSS_COMPILE)objdump
 
-AFLAGS = -D__ASSEMBLY__ -DTEXT_BASE=0x80400000 -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -nostdinc -DCONFIG_MIPS -D__MIPS__ -march=74kc -mno-abicalls -pipe -fno-pic
-CFLAGS = -Wall -Wa,-gstabs -g  -O1   -D__KERNEL__ -DLOAD_ADDRESS=$(LOADADDR) -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=74kc -mno-abicalls -fno-pic
+AFLAGS = -D__ASSEMBLY__ -DTEXT_BASE=0x80400000 -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -nostdinc -DCONFIG_MIPS -D__MIPS__ -march=mips32r2 -mno-abicalls -pipe -fno-pic -mno-dsp
+CFLAGS = -Wall -Wa,-gstabs -g  -O1   -D__KERNEL__ -DLOAD_ADDRESS=$(LOADADDR) -I$(TOPDIR) -I$(TOPDIR)/include -fno-builtin -nostdinc -pipe  -DCONFIG_MIPS -D__MIPS__  -march=mips32r2 -mno-abicalls -fno-pic -mno-dsp
 
 # Drop some uninteresting sections in the kernel.
 # This is only relevant for ELF kernels but doesn't hurt a.out
@@ -51,8 +51,10 @@ x86_test:
 .PHONY: vmlrd_lzma.c
 
 vmlrd_lzma.c: vmlrd.bin
-	lzma e vmlrd.bin -so > vmlrd.bin.lzma
-	$(UTILPATH)/bin2barray vmlrd.bin.lzma > vmlrd_lzma.c
+	$(STAGING_UTIL_PATH)/lzma e vmlrd.bin -so > vmlrd.bin.lzma
+	$(STAGING_UTIL_PATH)/bin2barray vmlrd.bin.lzma > vmlrd_lzma.c
+	echo "entry: 0x80060000" > vmlinux.info
+	echo "link: 0x80060000" >> vmlinux.info
 	cat vmlinux.info | sed "s/:/ \=/" | sed 's/^/unsigned long vmlrd_lzma_/' | sed 's/$$/\;/' >> vmlrd_lzma.c
 
 ihex : $(PRJ_NAME).ihex
@@ -72,8 +74,8 @@ $(PRJ_NAME).ihex : $(PRJ_NAME).elf
 
 $(PRJ_NAME).bin : $(PRJ_NAME).elf
 	$(OBJCOPY) -S -O binary $(strip-flags) $(PRJ_NAME).elf $(PRJ_NAME).bin
-	$(UTILPATH)/bin2hex $(PRJ_NAME).bin vmlrd_lzma.c 0 0 vmlrd_lzma
-	$(UTILPATH)/array2bin vmlrd_lzma.c ath_tgt_fw2.fw
+	$(STAGING_UTIL_PATH)/bin2hex $(PRJ_NAME).bin vmlrd_lzma.c 0 0 vmlrd_lzma
+	$(STAGING_UTIL_PATH)/array2bin vmlrd_lzma.c ath_tgt_fw2.fw
     
 $(PRJ_NAME).objdump:  $(PRJ_NAME).elf
 	$(OBJDUMP) -Dlxs $< > $@

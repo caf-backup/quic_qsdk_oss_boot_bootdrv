@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2013, 2016 The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1965,15 +1965,25 @@ done:
 	ath_gmac_halt(mac);
 
 	if (!more && (status == A_STATUS_OK)) {
-		/*
-		 * Disable all interrupts. Else, kernel might get interrupts
-		 * from here, before the driver is up and panic
-		 */
-		ath_gmac_reg_wr(mac, ATH_DMA_INTR_MASK, 0);
-		/* Restore gpio state */
-		ath_reg_wr(GPIO_OE_ADDRESS, 0x0026fb0b);
-		printf("Calling 2nd stage\n");
-		call_fw(1, eloc);
+		printf("\nimage receive completed.\n");
+		if(eloc == 0) {
+			/*
+			 * eloc(execution address) is 0 means this is some data
+			 * and CPU should not jump to the requested Address
+			 */
+			printf("\nThe last image received is not executable..");
+			printf("Waiting to receive next image...\n");
+		} else {
+			/*
+			 * Disable all interrupts. Else, kernel might get interrupts
+			 * from here, before the driver is up and panic
+			 */
+			ath_gmac_reg_wr(mac, ATH_DMA_INTR_MASK, 0);
+			/* Restore gpio state */
+			ath_reg_wr(GPIO_OE_ADDRESS, 0x0026fb0b);
+			printf("Calling 2nd stage\n");
+			call_fw(1, eloc);
+		}
 	}
 }
 
